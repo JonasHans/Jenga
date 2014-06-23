@@ -9,7 +9,7 @@ public class Tower {
 
 	ArrayList<Layer> struct;
 
-	public Tower(boolean newTower) {
+	public Tower() {
 		
 		struct = new ArrayList<Layer>();
 		Layer temp;
@@ -24,7 +24,7 @@ public class Tower {
 		}
 	}
 
-	public Tower() {
+	public Tower(boolean newTower) {
 
 		struct = new ArrayList<Layer>();
 		struct = readTower();
@@ -154,7 +154,7 @@ public class Tower {
 
 			for (Block b : blocks) {
 				if (b == null) {
-					print += "  ";
+					print += "O ";
 				} else {
 					print += direction + " ";
 				}

@@ -4,9 +4,31 @@ import java.io.*;
 public class Jenga {
 
 	public static void main(String[] args) {
+		// Default values
+		Tower structure = new Tower();
+		int xCoords = 100;
+		int yCoords = 100;
+
+		try {
+			if(args[1].matches("[-+]?\\d*\\.?\\d+")) {
+				xCoords = Integer.parseInt(args[1]);
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {}
+
+		try {
+			if(args[2].matches("[-+]?\\d*\\.?\\d+")) {
+				yCoords = Integer.parseInt(args[2]);
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {}
+
+		try {
+			if(args[0].equals("old")) {
+				System.out.println("USE OLD");
+				structure = new Tower(true);
+			}			
+		} catch(ArrayIndexOutOfBoundsException e) {}
 
 		Scanner sc = new Scanner(System.in);
-		Tower structure = new Tower(true);
 		String input;
 
 		structure.printTower();
