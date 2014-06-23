@@ -7,11 +7,11 @@ public class Tower {
 	static private double BLOCK_WIDTH = 25;
 	static private double BLOCK_HEIGHT = 15;
 
-	ArrayList<Layer> tower;
+	ArrayList<Layer> struct;
 
 	public Tower(boolean newTower) {
 		
-		tower = new ArrayList<Layer>();
+		struct = new ArrayList<Layer>();
 		Layer temp;
 
 		for(int i = 0; i < 18; i++) {
@@ -20,18 +20,18 @@ public class Tower {
 			} else {
 				temp = new Layer('X', i);
 			}
-			tower.add(temp);
+			struct.add(temp);
 		}
 	}
 
 	public Tower() {
 
-		tower = readTower();
+		struct = readTower();
 
 	}
 
 	public void printTower() {
-		for (Layer l : tower) {
+		for (Layer l : struct) {
 			for (Block b : l.blocks) {
 				if (b == null) {
 					System.out.print("O ");
@@ -64,14 +64,14 @@ public class Tower {
 				}
 				// Make layer and add to tower
 				Layer temp = new Layer(direction, layerNr, splitLine);
-				tower.add(temp);
+				struct.add(temp);
 				layerNr++;
 			}
 		} catch(IOException e) {
 			System.out.println("File tower.txt not found!");
 		}
 
-		return tower;
+		return struct;
 	}
 
 
