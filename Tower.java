@@ -32,14 +32,7 @@ public class Tower {
 
 	public void printTower() {
 		for (Layer l : struct) {
-			for (Block b : l.blocks) {
-				if (b == null) {
-					System.out.print("O ");
-				} else {
-					System.out.print(l.direction + " ");
-				}
-			}
-			System.out.println();
+			System.out.println(l);
 		}
 	}
 
