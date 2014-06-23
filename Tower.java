@@ -93,11 +93,12 @@ public class Tower {
 		Layer topLayer = struct.get(struct.size() - 1);
 		for (int i = 0; i < 3; i++) {
 			if (topLayer.blocks[i] == null) {
-				topLayer.blocks[i] = new Block(i, topLayer.direction);
+				topLayer.blocks[i] = topLayer.createBlock(i, topLayer.direction);
 				newLayer = false;
 				break;
 			}
 		}
+
 		if (newLayer) {
 			String newLayerDirection = "";
 			if (topLayer.direction == 'X') {
@@ -105,73 +106,11 @@ public class Tower {
 			} else {
 				newLayerDirection = "X";
 			}
+
 			String[] tempBlocks = {newLayerDirection, "O", "O"};
 
 			int newLayerPos = topLayer.layerPos + 1;
 			struct.add(new Layer(newLayerDirection.charAt(0), newLayerPos, tempBlocks));
-		}
-	}
-
-
-	class Layer {
-
-		char direction;
-		int layerPos;
-		Block[] blocks;
-
-		// Constructor for new (full) layer
-		public Layer(char d, int p) {
-
-			blocks = new Block[3];
-			direction = d;
-			layerPos = p;
-
-			for (int i = 0; i < 3; i++) {
-				blocks[i] = new Block(i, d);
-			}
-
-		}
-
-		// Constructor for existing layer
-		public Layer(char d, int p, String[] b) {
-
-			blocks = new Block[3];
-			direction = d;
-			layerPos = p;
-
-			for (int i = 0; i < 3; i++) {
-				if (b[i].equals("O")) {
-					blocks[i] = null;
-				} else {
-					blocks[i] = new Block(i, d);
-				}
-			}
-		}
-
-		// Print method for Layer
-		public String toString() {
-			String print = "";
-
-			for (Block b : blocks) {
-				if (b == null) {
-					print += "O ";
-				} else {
-					print += direction + " ";
-				}
-			}
-			return print;
-		}
-	}
-
-
-	class Block {
-
-		int blockPos;
-		char direction;
-
-		public Block(int p, char d) {
-			blockPos = p;
-			direction = d;
 		}
 	}
 
