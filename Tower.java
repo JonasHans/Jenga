@@ -26,13 +26,17 @@ public class Tower {
 
 	public Tower() {
 
+		struct = new ArrayList<Layer>();
 		struct = readTower();
 
 	}
 
 	public void printTower() {
-		for (Layer l : struct) {
-			System.out.println(l);
+		System.out.println("\tColumn");
+		System.out.println("Row\t1 2 3");
+		for (int i = struct.size() - 1; i > -1; i--) {
+			System.out.print(i + 1 + ".\t");
+			System.out.println(struct.get(i));
 		}
 	}
 
@@ -65,6 +69,57 @@ public class Tower {
 		}
 
 		return struct;
+	}
+
+	public void writeTower() {
+		try {
+			PrintWriter writer = new PrintWriter("tower.txt");
+			for (Layer l : struct) {
+				writer.println(l);
+			}
+			writer.close();
+		} catch (IOException e) {
+	       	e.printStackTrace();
+	    }
+	}
+
+	public boolean removeBlock(int row, int col) {
+		if (row <= struct.size() - 1 && col < 3) {
+			if (struct.get(row).blocks[col] != null) {
+				struct.get(row).blocks[col] = null;
+				return true;
+			} else {
+				System.out.println("Position already empty");
+				return false;
+			}
+		} else {
+			System.out.println("Illegal move, row/column non-existent");
+			return false;
+		}
+	}
+
+	public void addBlock() {
+		boolean newLayer = true;
+		Layer topLayer = struct.get(struct.size() - 1);
+		for (int i = 0; i < 3; i++) {
+			if (topLayer.blocks[i] == null) {
+				topLayer.blocks[i] = new Block(i, topLayer.direction);
+				newLayer = false;
+				break;
+			}
+		}
+		if (newLayer) {
+			String newLayerDirection = "";
+			if (topLayer.direction == 'X') {
+				newLayerDirection = "Y";
+			} else {
+				newLayerDirection = "X";
+			}
+			String[] tempBlocks = {newLayerDirection, "O", "O"};
+
+			int newLayerPos = topLayer.layerPos + 1;
+			struct.add(new Layer(newLayerDirection.charAt(0), newLayerPos, tempBlocks));
+		}
 	}
 
 
@@ -103,12 +158,13 @@ public class Tower {
 			}
 		}
 
+		// Print method for Layer
 		public String toString() {
 			String print = "";
 
 			for (Block b : blocks) {
 				if (b == null) {
-					print += "O ";
+					print += "  ";
 				} else {
 					print += direction + " ";
 				}

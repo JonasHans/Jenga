@@ -5,22 +5,27 @@ public class Jenga{
 
 	public static void main(String[] args) {
 
-		Tower structure = new Tower();
-		structure.printTower();
-		writeToFile("tower.txt", structure);
-	}
+		Scanner sc = new Scanner(System.in);
 
-	static void writeToFile(String f, Tower t){
-		try{
-			PrintWriter writer = new PrintWriter(f);
-			for (int i = 0; i < t.struct.size(); i++) {
-				writer.print(t.struct.get(i));
-				writer.println("");
+		Tower structure = new Tower(true);
+		String input;
+		structure.printTower();
+		while (true) {
+			boolean correctInput = false;
+			while (!correctInput) {
+				System.out.print("Row: ");
+				int row = sc.nextInt() - 1;
+				System.out.print("Column: ");
+				int col = sc.nextInt() - 1;
+				correctInput = structure.removeBlock(row, col);
+				structure.addBlock();
 			}
-			writer.close();
-		}catch (IOException e) {
-	       	e.printStackTrace();
-	    }
+			structure.writeTower();
+			structure.printTower();
+			System.out.println("Removed block");
+		}
+
+
 	}
 
 }
