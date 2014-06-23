@@ -89,7 +89,7 @@ public class Tower {
 			layerPos = p;
 
 			for (int i = 0; i < 3; i++) {
-				blocks[i] = new Block(i);
+				blocks[i] = new Block(i, d);
 			}
 
 		}
@@ -105,7 +105,7 @@ public class Tower {
 				if (b[i].equals("O")) {
 					blocks[i] = null;
 				} else {
-					blocks[i] = new Block(i);
+					blocks[i] = new Block(i, d);
 				}
 			}
 		}
@@ -115,9 +115,11 @@ public class Tower {
 	class Block {
 
 		int blockPos;
+		char direction;
 
-		public Block(int p) {
+		public Block(int p, char d) {
 			blockPos = p;
+			direction = d;
 		}
 	}
 }
