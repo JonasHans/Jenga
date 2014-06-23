@@ -29,7 +29,20 @@ public class Tower {
 
 	}
 
-	public ArrayList<Layer> readTower() {
+	public void printTower() {
+		for (Layer l : tower) {
+			for (Block b : blocks) {
+				if (b == null) {
+					SYstem.out.print("O ");
+				} else {
+					System.out.print(b.direction + " ");
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	private ArrayList<Layer> readTower() {
 
 		int layerNr = 0;
 		char direction;
