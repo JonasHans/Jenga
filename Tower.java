@@ -109,6 +109,19 @@ public class Tower {
 				}
 			}
 		}
+
+		public String toString() {
+			String print = "";
+
+			for (Block b : blocks) {
+				if (b == null) {
+					print += "O ";
+				} else {
+					print += direction + " ";
+				}
+			}
+			return print;
+		}
 	}
 
 
@@ -122,4 +135,5 @@ public class Tower {
 			direction = d;
 		}
 	}
+
 }
