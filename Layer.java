@@ -47,6 +47,7 @@ public class Layer {
 			return print;
 		}
 
+		// Create block method for layer
 		public Block createBlock(int p, char d) {
 			Block newBlock = new Block(p, d);
 			return newBlock;

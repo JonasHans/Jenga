@@ -8,28 +8,45 @@ public class Jenga {
 		Tower structure = new Tower();
 		int xCoords = 100;
 		int yCoords = 100;
+		Console cnsl = null;
 
+		// User input values
 		try {
-			if(args[1].matches("[-+]?\\d*\\.?\\d+")) {
-				xCoords = Integer.parseInt(args[1]);
-			}
-		} catch (ArrayIndexOutOfBoundsException e) {}
+			cnsl = System.console();
 
-		try {
-			if(args[2].matches("[-+]?\\d*\\.?\\d+")) {
-				yCoords = Integer.parseInt(args[2]);
-			}
-		} catch (ArrayIndexOutOfBoundsException e) {}
-
-		try {
-			if(args[0].equals("old")) {
-				System.out.println("USE OLD");
+			String old = cnsl.readLine("Do you want to create a new tower? (Y/N) ");
+			if (old.equals("N")) {
 				structure = new Tower(true);
-			}			
-		} catch(ArrayIndexOutOfBoundsException e) {}
+			}
+
+			xCoords = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));
+			yCoords = Integer.parseInt(cnsl.readLine("What is the starting Y coordinate for the tower? "));
+
+		} catch (Exception ex) {
+			System.out.println("Wrong input, default values are used!");
+		}
+
+		// Arguments with terminal launch
+		// try {
+		// 	if(args[1].matches("[-+]?\\d*\\.?\\d+")) {
+		// 		xCoords = Integer.parseInt(args[1]);
+		// 	}
+		// } catch (ArrayIndexOutOfBoundsException e) {}
+
+		// try {
+		// 	if(args[2].matches("[-+]?\\d*\\.?\\d+")) {
+		// 		yCoords = Integer.parseInt(args[2]);
+		// 	}
+		// } catch (ArrayIndexOutOfBoundsException e) {}
+
+		// try {
+		// 	if(args[0].equals("old")) {
+		// 		System.out.println("USE OLD");
+		// 		structure = new Tower(true);
+		// 	}			
+		// } catch(ArrayIndexOutOfBoundsException e) {}
 
 		Scanner sc = new Scanner(System.in);
-		String input;
 
 		structure.printTower();
 
