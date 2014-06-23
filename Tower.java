@@ -83,19 +83,9 @@ public class Tower {
 	    }
 	}
 
-	public boolean removeBlock(int row, int col) {
-		if (row <= struct.size() - 1 && col < 3) {
-			if (struct.get(row).blocks[col] != null) {
-				struct.get(row).blocks[col] = null;
-				return true;
-			} else {
-				System.out.println("Position already empty");
-				return false;
-			}
-		} else {
-			System.out.println("Illegal move, row/column non-existent");
-			return false;
-		}
+
+	public void removeBlock(int row, int col) {
+		struct.get(row).blocks[col] = null;
 	}
 
 	public void addBlock() {
