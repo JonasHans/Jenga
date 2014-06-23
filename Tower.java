@@ -9,15 +9,16 @@ public class Tower {
 
 	ArrayList<Layer> tower;
 
-	public Tower(boolean new) {
+	public Tower(boolean newTower) {
 		
-		tower = new ArrayList<Layer>;
+		tower = new ArrayList<Layer>();
+		Layer temp;
 
 		for(int i = 0; i < 18; i++) {
 			if (i % 2 == 0) {
-				Layer temp = new Layer('Y', i);
+				temp = new Layer('Y', i);
 			} else {
-				Layer temp = new Layer('X', i);
+				temp = new Layer('X', i);
 			}
 			tower.add(temp);
 		}
@@ -31,11 +32,11 @@ public class Tower {
 
 	public void printTower() {
 		for (Layer l : tower) {
-			for (Block b : blocks) {
+			for (Block b : l.blocks) {
 				if (b == null) {
-					SYstem.out.print("O ");
+					System.out.print("O ");
 				} else {
-					System.out.print(b.direction + " ");
+					System.out.print(l.direction + " ");
 				}
 			}
 			System.out.println();
@@ -45,7 +46,7 @@ public class Tower {
 	private ArrayList<Layer> readTower() {
 
 		int layerNr = 0;
-		char direction;
+		char direction = 'O';
 		String line;
 		String[] splitLine;
 		BufferedReader br;
