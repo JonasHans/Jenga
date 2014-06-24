@@ -100,7 +100,7 @@ public class Tower {
 		Layer topLayer = struct.get(struct.size() - 1);
 		Block tempBlock;
 		for (int i = 0; i < 3; i++) {
-			if (topLayer.getBlocks()[i] == null) {
+			if (topLayer.blocks[i] == null) {
 				tempBlock = new Block(i, topLayer.getDirection(), struct.size()-1);
 				topLayer.blocks[i] = tempBlock;
 				newLayer = false;
@@ -130,6 +130,10 @@ public class Tower {
 	// Returns true if block is in tower (and not top layer)
 	public boolean inTower(int row, int col) {
 		return (row < struct.size() -1 && row >= 0 && col >= 0 && col <= 2);
+	}
+
+	public Block getBlock(int row, int col) {
+		return struct.get(row).blocks[col];
 	}
 
 }
