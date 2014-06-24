@@ -12,7 +12,7 @@ public class Layer {
 			layerPos = p;
 
 			for (int i = 0; i < 3; i++) {
-				blocks[i] = new Block(i, d);
+				blocks[i] = new Block(i, d, p);
 			}
 
 		}
@@ -28,7 +28,7 @@ public class Layer {
 				if (b[i].equals("O")) {
 					blocks[i] = null;
 				} else {
-					blocks[i] = new Block(i, d);
+					blocks[i] = new Block(i, d, p);
 				}
 			}
 		}
@@ -47,20 +47,4 @@ public class Layer {
 			return print;
 		}
 
-		// Create block method for layer
-		public Block createBlock(int p, char d) {
-			Block newBlock = new Block(p, d);
-			return newBlock;
-		}
-
-	class Block {
-
-		int blockPos;
-		char direction;
-
-		public Block(int p, char d) {
-			blockPos = p;
-			direction = d;
-		}
-	}
 }
