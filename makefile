@@ -12,7 +12,8 @@ CLASSES = \
 	Layer.java \
 	Move.java \
 	GripperPosition.java \
-	Point.java
+	Point.java \
+	JointValues.java
 
 default: classes
 
