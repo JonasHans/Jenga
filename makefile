@@ -10,7 +10,9 @@ CLASSES = \
 	BlockCoords.java \
 	Jenga.java \
 	Layer.java \
-	Move.java
+	Move.java \
+	GripperPosition.java \
+	Point.java
 
 default: classes
 
