@@ -91,9 +91,11 @@ public class Tower {
 	public void addBlock() {
 		boolean newLayer = true;
 		Layer topLayer = struct.get(struct.size() - 1);
+		Block tempBlock;
 		for (int i = 0; i < 3; i++) {
 			if (topLayer.blocks[i] == null) {
-				topLayer.blocks[i] = topLayer.createBlock(i, topLayer.direction);
+				tempBlock = new Block(i, topLayer.direction, struct.size()-1);
+				topLayer.blocks[i] = tempBlock;
 				newLayer = false;
 				break;
 			}
