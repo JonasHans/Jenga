@@ -4,9 +4,16 @@ import java.io.*;
 public class Tower {
 
 	ArrayList<Layer> struct;
+	int x;
+	int y;
+	int z;
+	int theta;
 
-	public Tower() {
-		
+	public Tower(int tx, int ty, int tz, int ttheta) {
+		x  = tx;
+		y = ty;
+		z = tz;
+		theta = ttheta;
 		struct = new ArrayList<Layer>();
 		Layer temp;
 
@@ -20,7 +27,11 @@ public class Tower {
 		}
 	}
 
-	public Tower(boolean newTower) {
+	public Tower(int tx, int ty, int tz, int ttheta, boolean newTower) {
+		x  = tx;
+		y = ty;
+		z = tz;
+		theta = ttheta;
 
 		struct = new ArrayList<Layer>();
 		struct = readTower();
@@ -110,6 +121,15 @@ public class Tower {
 			int newLayerPos = topLayer.getLayerPos() + 1;
 			struct.add(new Layer(newLayerDirection.charAt(0), newLayerPos, tempBlocks));
 		}
+	}
+
+	public boolean hasBlock(int row, int col) {
+		return (struct.get(row).blocks[col] != null);
+	}
+
+	// Returns true if block is in tower (and not top layer)
+	public boolean inTower(int row, int col) {
+		return (row < struct.size() -1 && row >= 0 && col >= 0 && col <= 2);
 	}
 
 }

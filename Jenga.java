@@ -4,60 +4,53 @@ import java.io.*;
 public class Jenga {
 
 	public static void main(String[] args) {
+
 		// Default values
-		Tower structure = new Tower();
-		int xCoords = 100;
-		int yCoords = 100;
+		int tX = 100;
+		int tY = 100;
+		int tZ = 0;
+		int theta = 0;
+
+
+		Tower tower = new Tower(tX, tY, tZ, theta);
 		Console cnsl = System.console(); 
 
 		// User input values
 		try {
+			tX = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));
+			tY = Integer.parseInt(cnsl.readLine("What is the starting Y coordinate for the tower? "));
+			tZ = Integer.parseInt(cnsl.readLine("What is the starting Z coordinate for the tower? "));
+			theta = Integer.parseInt(cnsl.readLine("What is the starting theta for the tower? "));
+
 			String old = cnsl.readLine("Do you want to create a new tower? (Y/N) ");
 			if (old.equals("N")) {
-				structure = new Tower(true);
+				tower = new Tower(tX, tY, tZ, theta, true);
 			}
-
-			xCoords = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));
-			yCoords = Integer.parseInt(cnsl.readLine("What is the starting Y coordinate for the tower? "));
 
 		} catch (Exception ex) {
 			System.out.println("Wrong input, default values are used!");
 		}
 
-		// Arguments with terminal launch
-		// try {
-		// 	if(args[1].matches("[-+]?\\d*\\.?\\d+")) {
-		// 		xCoords = Integer.parseInt(args[1]);
-		// 	}
-		// } catch (ArrayIndexOutOfBoundsException e) {}
+		Move move = new Move(tower);
 
-		// try {
-		// 	if(args[2].matches("[-+]?\\d*\\.?\\d+")) {
-		// 		yCoords = Integer.parseInt(args[2]);
-		// 	}
-		// } catch (ArrayIndexOutOfBoundsException e) {}
+		while (!move.gameEnds) {
 
-		// try {
-		// 	if(args[0].equals("old")) {
-		// 		System.out.println("USE OLD");
-		// 		structure = new Tower(true);
-		// 	}			
-		// } catch(ArrayIndexOutOfBoundsException e) {}
+			// PLAYER MOVE
+			int row = Integer.parseInt(cnsl.readLine("Row: ")) - 1;
+			int col = Integer.parseInt(cnsl.readLine("Column: ")) - 1;
 
-		Scanner sc = new Scanner(System.in);
+			move = new Move(tower, row, col);
+			while (!move.isLegal) {
+				System.out.println("Illegal move, try again");
+				row = Integer.parseInt(cnsl.readLine("Row: ")) - 1;
+				col = Integer.parseInt(cnsl.readLine("Column: ")) - 1;
+				move = new Move(tower, row, col);
+			}
+			tower.printTower();
 
-		structure.printTower();
-
-		while (true) {
-			System.out.print("Row: ");
-			int row = sc.nextInt() - 1;
-			System.out.print("Column: ");
-			int col = sc.nextInt() - 1;
-
-			structure.removeBlock(row, col);
-			structure.addBlock();
-			structure.writeTower();
-			structure.printTower();
+			// AI MOVE
+			move = new Move(tower, "AImove");
+			tower.printTower();
 		}
 
 
