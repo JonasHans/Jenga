@@ -57,9 +57,4 @@ public class Layer {
 			return layerPos;
 		}
 
-		// Returns the blocks contained by the layer
-		public Block[] getBlocks() {
-			return blocks;
-		}
-
 }
