@@ -103,7 +103,7 @@ public class Tower {
 
 		if (newLayer) {
 			String newLayerDirection = "";
-			if (topLayer.direction == 'X') {
+			if (topLayer.getDirection() == 'X') {
 				newLayerDirection = "Y";
 			} else {
 				newLayerDirection = "X";
@@ -111,7 +111,7 @@ public class Tower {
 
 			String[] tempBlocks = {newLayerDirection, "O", "O"};
 
-			int newLayerPos = topLayer.layerPos + 1;
+			int newLayerPos = topLayer.getLayerPos() + 1;
 			struct.add(new Layer(newLayerDirection.charAt(0), newLayerPos, tempBlocks));
 		}
 	}

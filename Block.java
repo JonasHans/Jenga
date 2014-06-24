@@ -11,4 +11,19 @@ public class Block {
 			direction = d;
 		}
 
+		// Returns the column
+		public int getColumn() {
+			return col;
+		}
+
+		// Returns the row
+		public int getRow() {
+			return row;
+		}
+
+		// Returns the direction
+		public char getDirection() {
+			return direction;
+		}
+
 	}

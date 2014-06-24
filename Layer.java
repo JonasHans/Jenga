@@ -47,4 +47,19 @@ public class Layer {
 			return print;
 		}
 
+		// Returns the direction
+		public char getDirection() {
+			return direction;
+		}
+
+		// Returns the layer position
+		public int getLayerPos() {
+			return layerPos;
+		}
+
+		// Returns the blocks contained by the layer
+		public Block[] getBlocks() {
+			return blocks;
+		}
+
 }
