@@ -93,8 +93,8 @@ public class Tower {
 		Layer topLayer = struct.get(struct.size() - 1);
 		Block tempBlock;
 		for (int i = 0; i < 3; i++) {
-			if (topLayer.blocks[i] == null) {
-				tempBlock = new Block(i, topLayer.direction, struct.size()-1);
+			if (topLayer.getBlocks()[i] == null) {
+				tempBlock = new Block(i, topLayer.getDirection(), struct.size()-1);
 				topLayer.blocks[i] = tempBlock;
 				newLayer = false;
 				break;
