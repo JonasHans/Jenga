@@ -15,18 +15,8 @@ public class Point {
 		y = newy;
 	}
 
-	public boolean equals(double newx, double newy) {
-		if(newx == x && newy == y) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean equals(double newx, double newy, double newx) {
-		if(newx == x && newy == y && newz == z) {
-			return true;
-		}
-		return false;
+	public boolean equals(Point temp) {
+		return(temp.x == x && temp.y == y && temp.z == z);
 	}
 
 	public String toString() {
