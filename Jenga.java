@@ -5,11 +5,9 @@ public class Jenga {
 
 	public static void main(String[] args) {
 
-		System.out.println(1234.123e+011);
-
 		// Default values
-		int tX = 100;
-		int tY = 100;
+		int tX = 200;
+		int tY = 200;
 		int tZ = 0;
 		// For now theta can only be 0!
 		int theta = 0;

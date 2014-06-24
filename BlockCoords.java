@@ -12,11 +12,17 @@ public class BlockCoords {
 
 	public BlockCoords(Tower t, Block b) {
 
+		int boardX = t.x;
+		int boardY = t.y;
+		int boardZ = t.z;
+		int theta = t.theta;
+
+
 		int row = b.getRow();
 		int col = 2 - b.getColumn();
 		char direction = b.getDirection();
 
-		z = row * BLOCK_HEIGHT + 0.5 * BLOCK_HEIGHT ;
+		z = row * BLOCK_HEIGHT + 0.5 * BLOCK_HEIGHT + boardZ;
 
 		// X and Y dependant on direction of block
 		if (direction == 'Y') {
