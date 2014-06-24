@@ -10,9 +10,12 @@ public class BlockCoords {
 	double eX, eY;    
 	double z;
 
-	public BlockCoords(char direction, int row, int col, int boardX, int boardY, int theta) {
+	public BlockCoords(Tower t, Block b) {
 
-		col = 2 - col;
+		int row = b.getRow();
+		int col = 2 - b.getColumn();
+		char direction = b.getDirection();
+
 		z = row * BLOCK_HEIGHT + 0.5 * BLOCK_HEIGHT ;
 
 		// X and Y dependant on direction of block

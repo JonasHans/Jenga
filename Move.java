@@ -1,9 +1,14 @@
+import java.util.Vector;
+
 public class Move {
+
+	static private double GRIPPER_LENGTH = 189.0;
+	static private double GRIPPER_PITCH = 0;
+	static private double GRIPPER_GRIP = 0;
 
 	boolean isLegal;
 	boolean gameEnds;
-
-	Vector <GripperPosition>
+	Vector<GripperPosition> positions;
 
 	// Dummy move to print tower and set booleans
 	public Move(Tower t) {
@@ -19,9 +24,14 @@ public class Move {
 		gameEnds = false;
 		isLegal = true;
 		int[] position = searchBlock(t);
+		int row = position[0];
+		int col = position[1];
 
 		if (position != null) {
-			t.removeBlock(position[0], position[1]);
+			Block b = t.getBlock(row, col);
+			BlockCoords coords = new BlockCoords(t, b);
+			planPath(coords);
+			t.removeBlock(row, col);
 			t.addBlock();
 		} else {
 			gameEnds = true;
@@ -79,5 +89,21 @@ public class Move {
 		return null;
 	}
 
+	public void planPath(BlockCoords c, Block b) {
+
+		Point tempPoint;
+		GripperPosition temp;
+
+
+		if (b.direction == 'Y') {
+			tempPoint = new Point(c.bX, c.bY - GRIPPER_LENGTH, c.z);
+			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP);
+		} else {
+			tempPoint = new Point(c.bX - GRIPPER_LENGTH, c.bY, c.z);
+			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP);
+		}
+
+
+	}
 
 }

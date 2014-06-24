@@ -5,10 +5,13 @@ public class Jenga {
 
 	public static void main(String[] args) {
 
+		System.out.println(1234.123e+011);
+
 		// Default values
 		int tX = 100;
 		int tY = 100;
 		int tZ = 0;
+		// For now theta can only be 0!
 		int theta = 0;
 
 
@@ -20,7 +23,7 @@ public class Jenga {
 			tX = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));
 			tY = Integer.parseInt(cnsl.readLine("What is the starting Y coordinate for the tower? "));
 			tZ = Integer.parseInt(cnsl.readLine("What is the starting Z coordinate for the tower? "));
-			theta = Integer.parseInt(cnsl.readLine("What is the starting theta for the tower? "));
+			//theta = Integer.parseInt(cnsl.readLine("What is the starting theta for the tower? ")); ONLY 0!
 
 			String old = cnsl.readLine("Do you want to create a new tower? (Y/N) ");
 			if (old.equals("N")) {
