@@ -3,10 +3,6 @@ import java.io.*;
 
 public class Tower {
 
-	static private double BLOCK_LENGTH = 75;
-	static private double BLOCK_WIDTH = 25;
-	static private double BLOCK_HEIGHT = 15;
-
 	ArrayList<Layer> struct;
 
 	public Tower() {
@@ -89,7 +85,7 @@ public class Tower {
 	}
 
 	public void addBlock() {
-		boolean newLayer = true;
+		boolean newLayer = true;  
 		Layer topLayer = struct.get(struct.size() - 1);
 		Block tempBlock;
 		for (int i = 0; i < 3; i++) {

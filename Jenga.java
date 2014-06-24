@@ -8,12 +8,10 @@ public class Jenga {
 		Tower structure = new Tower();
 		int xCoords = 100;
 		int yCoords = 100;
-		Console cnsl = null;
+		Console cnsl = System.console(); 
 
 		// User input values
 		try {
-			cnsl = System.console();
-
 			String old = cnsl.readLine("Do you want to create a new tower? (Y/N) ");
 			if (old.equals("N")) {
 				structure = new Tower(true);
