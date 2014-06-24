@@ -2,17 +2,12 @@ public class Point {
 
 	double x;
 	double y;
-	double z = 0;
+	double z;
 
 	public Point(double newx, double newy, double newz) {
 		x = newx;
 		y = newy;
 		z = newz;
-	}
-
-	public Point(double newx, double newy) {
-		x = newx;
-		y = newy;
 	}
 
 	public boolean equals(Point temp) {
