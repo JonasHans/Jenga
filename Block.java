@@ -1,6 +1,6 @@
 public class Block {
 
-		int col;
+		int col;  
 		int row;
 		char direction;
 
@@ -8,7 +8,7 @@ public class Block {
 		public Block(int c, char d, int r) {
 			col = c;
 			row = r;
-			direction = d;
+			direction = d; 
 		}
 
 		// Returns the column

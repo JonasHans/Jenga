@@ -1,6 +1,6 @@
 public class Layer {
 
-		char direction;
+		char direction;  
 		int layerPos;
 		Block[] blocks;
 
@@ -11,7 +11,7 @@ public class Layer {
 			direction = d;
 			layerPos = p;
 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) { 
 				blocks[i] = new Block(i, d, p);
 			}
 

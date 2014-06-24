@@ -6,8 +6,8 @@ public class BlockCoords {
 	static private double BLOCK_HEIGHT = 15;
 
 	// Coordinates of a block
-	double beginX, beginY;
-	double endX, endY; 
+	double bX, bY;
+	double eX, eY;    
 	double z;
 
 	public BlockCoords(char direction, int row, int col, int boardX, int boardY, int theta) {
@@ -17,22 +17,22 @@ public class BlockCoords {
 
 		// X and Y dependant on direction of block
 		if (direction == 'Y') {
-			beginX = col * BLOCK_WIDTH + 0.5 * BLOCK_WIDTH;
-			endX = beginX;
-			beginY = 0;
-			endY = BLOCK_LENGTH;
+			bX = col * BLOCK_WIDTH + 0.5 * BLOCK_WIDTH;
+			eX = bX;
+			bY = 0;
+			eY = BLOCK_LENGTH;
 		} else {
-			beginX = 0;
-			endX = BLOCK_LENGTH;
-			beginY = col * BLOCK_WIDTH + 0.5 * BLOCK_WIDTH;
-			endY = beginY;
+			bX = 0;
+			eX = BLOCK_LENGTH;
+			bY = col * BLOCK_WIDTH + 0.5 * BLOCK_WIDTH;
+			eY = bY;
 		}
 
 		// Rotate and translate vectors
-		beginX = boardX + Math.cos(theta) * beginX - Math.sin(theta) * beginY;
-		beginY = boardY + Math.sin(theta) * beginX + Math.cos(theta) * beginY;
+		bX = boardX + Math.cos(theta) * bX - Math.sin(theta) * bY;
+		bY = boardY + Math.sin(theta) * bX + Math.cos(theta) * bY;
 
-		endX = boardX + Math.cos(theta) * endX - Math.sin(theta) * endY;
-		endY = boardY + Math.sin(theta) * endX + Math.cos(theta) * endY;
+		eX = boardX + Math.cos(theta) * eX - Math.sin(theta) * eY;
+		eY = boardY + Math.sin(theta) * eX + Math.cos(theta) * eY;
 	}
 }

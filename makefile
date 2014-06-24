@@ -1,22 +1,20 @@
-JCC = javac
 JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) $*.java
 
-default: Tower.class Jenga.class BlockCoords.class Layer.class Block.class
+CLASSES = \
+	Tower.java \
+	Block.java \
+	BlockCoords.java \
+	Jenga.java \
+	Layer.java \
+	Move.java
 
-Tower.class: Tower.java
-	$(JCC) $(JFLAGS) Tower.java
+default: classes
 
-Jenga.class: Jenga.java
-	$(JCC) $(JFLAGS) Jenga.java
+classes: $(CLASSES:.java=.class)
 
-BlockCoords.class: BlockCoords.java
-	$(JCC) $(JFLAGS) BlockCoords.java
-
-Layer.class: Layer.java
-	$(JCC) $(JFLAGS) Layer.java
-
-Block.class: Block.java
-	$(JCC) $(JFLAGS) Block.java
-
-clean: 
+clean:
 	$(RM) *.class
