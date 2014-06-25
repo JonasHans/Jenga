@@ -1,4 +1,5 @@
 import java.util.Vector;
+import java.io.*;
 
 public class InverseKinematics {
 
@@ -23,9 +24,7 @@ public class InverseKinematics {
 		for (JointValues j : joints) {
 			System.out.println(j);
 		}
-
-
-
+		writeJoints();
 	}
 
 	public GripperPosition correctCartesian(GripperPosition pos) {
@@ -70,6 +69,19 @@ public class InverseKinematics {
 		j.yaw = -((j.elbow / 2) + j.shoulder);
 
 		return j;
+	}
+
+
+	public void writeJoints() {
+		try {
+			PrintWriter writer = new PrintWriter("joints.txt");
+			for (JointValues j : joints) {
+				writer.println(j);
+			}
+			writer.close();
+		} catch (IOException e) {
+	       	e.printStackTrace();
+	    }
 	}
 
 }
