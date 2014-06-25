@@ -36,8 +36,7 @@ public class JointValues {
 	public String toString() {
 		String print = "";
 
-		print = "Elbow: "+ elbow +"Grip: "+ grip +"Pitch: "+ pitch +"Roll: "+ roll +"Shoulder: "+ shoulder +
-							"Yaw: "+ yaw + "Zed: "+ zed;
+		print = zed + " " + shoulder + " " + elbow + " " + yaw + " " + pitch + " " + roll + " " + grip;
 		return print;
 	}
 

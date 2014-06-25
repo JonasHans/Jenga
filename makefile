@@ -13,7 +13,8 @@ CLASSES = \
 	Move.java \
 	GripperPosition.java \
 	Point.java \
-	JointValues.java
+	JointValues.java \
+	InverseKinematics.java
 
 default: classes
 

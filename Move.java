@@ -22,6 +22,9 @@ public class Move {
 	// AI move
 	public Move(Tower t, String ai) {
 
+		positions = new Vector<GripperPosition>();
+		InverseKinematics iK;
+
 		gameEnds = false;
 		isLegal = true;
 		int[] position = searchBlock(t);
@@ -32,10 +35,14 @@ public class Move {
 			Block b = t.getBlock(row, col);
 			BlockCoords coords = new BlockCoords(t, b);
 			planPath(t, coords, b);
+			iK = new InverseKinematics(positions);
 			t.removeBlock(row, col);
 			t.addBlock();
 		} else {
 			gameEnds = true;
+		}
+		for (GripperPosition pos : positions) {
+			System.out.println(pos);
 		}
 	}
 
@@ -92,9 +99,12 @@ public class Move {
 
 	public void planPath(Tower t, BlockCoords c, Block b) {
 
-		double staticX = t.x - 100;
-		double staticY = t.y - 100;
+		double staticX = t.x - 200;
+		double staticY = t.y - 200;
 		double staticZ = t.z + 450;
+
+		System.out.println(staticX + " " + staticY + " " + staticZ);
+		System.out.println(c);
 
 		Point tempPoint;
 		GripperPosition temp;
@@ -103,6 +113,7 @@ public class Move {
 
 		tempPoint = new Point(staticX, staticY, c.z);
 		temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+		positions.addElement(temp);
 
 		if (b.direction == 'Y') {
 			c.bY -= extraLength;
@@ -118,13 +129,13 @@ public class Move {
 			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			for (int i = 0; i < 8; i++) {
+			for (int i = 1; i < 9; i++) {
 				tempPoint = new Point(c.bX, c.bY + i * 10, c.z);
 				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
-			for (int i = 8; i > 0; i--) {
+			for (int i = 7; i > -1; i--) {
 				tempPoint = new Point(c.bX, c.bY + i * 10, c.z);
 				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
@@ -148,13 +159,13 @@ public class Move {
 			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			for (int i = 0; i < 8; i++) {
+			for (int i = 1; i < 9; i++) {
 				tempPoint = new Point(c.bX + i * 10, c.bY, c.z);
 				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
-			for (int i = 8; i > 0; i--) {
+			for (int i = 7; i > -1; i--) {
 				tempPoint = new Point(c.bX + i * 10, c.bY, c.z);
 				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
@@ -167,5 +178,6 @@ public class Move {
 
 		tempPoint = new Point(staticX, staticY, staticZ);
 		temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+		positions.addElement(temp);
 	}
 }

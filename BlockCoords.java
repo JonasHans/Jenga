@@ -44,4 +44,11 @@ public class BlockCoords {
 		eX = boardX + Math.cos(theta) * eX - Math.sin(theta) * eY;
 		eY = boardY + Math.sin(theta) * eX + Math.cos(theta) * eY;
 	}
+
+	public String toString() {
+		String print = "";
+		print += "Begin: " + bX + " " + bY  + " End: " + eX + " " + eY + " Z: " + z;
+
+		return print;
+	}
 }
