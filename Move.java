@@ -9,7 +9,7 @@ public class Move {
 
 	boolean isLegal;
 	boolean gameEnds;
-	Vector<GripperPosition> positions;
+	Vector<GripperPos> positions;
 
 	// Dummy move to print tower and set booleans
 	public Move(Tower t) {
@@ -22,7 +22,7 @@ public class Move {
 	// AI move
 	public Move(Tower t, String ai) {
 
-		positions = new Vector<GripperPosition>();
+		positions = new Vector<GripperPos>();
 		InverseKinematics iK;
 
 		gameEnds = false;
@@ -41,9 +41,9 @@ public class Move {
 		} else {
 			gameEnds = true;
 		}
-		for (GripperPosition pos : positions) {
+		/*for (GripperPos pos : positions) {
 			System.out.println(pos);
-		}
+		}*/
 	}
 
 	// Human move
@@ -106,78 +106,78 @@ public class Move {
 		System.out.println(staticX + " " + staticY + " " + staticZ);
 		System.out.println(c);
 
-		Point tempPoint;
-		GripperPosition temp;
+		Coords tempCoords;
+		GripperPos temp;
 		double extraLength = GRIPPER_LENGTH + PAPER_LENGTH;
 		char direction = b.direction;
 
-		tempPoint = new Point(staticX, staticY, c.z);
-		temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+		tempCoords = new Coords(staticX, staticY, c.z);
+		temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 		positions.addElement(temp);
 
 		if (b.direction == 'Y') {
 			c.bY -= extraLength;
-			tempPoint = new Point(c.bX, staticY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX, staticY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			tempPoint = new Point(c.bX, c.bY - 10, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX, c.bY - 10, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			tempPoint = new Point(c.bX, c.bY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX, c.bY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
 			for (int i = 1; i < 9; i++) {
-				tempPoint = new Point(c.bX, c.bY + i * 10, c.z);
-				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				tempCoords = new Coords(c.bX, c.bY + i * 10, c.z);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
 			for (int i = 7; i > -1; i--) {
-				tempPoint = new Point(c.bX, c.bY + i * 10, c.z);
-				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				tempCoords = new Coords(c.bX, c.bY + i * 10, c.z);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
-			tempPoint = new Point(c.bX, staticY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX, staticY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
 		} else {
 			c.bX -= extraLength;
-			tempPoint = new Point(staticX, c.bY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(staticX, c.bY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			tempPoint = new Point(c.bX - 10, c.bY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX - 10, c.bY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			tempPoint = new Point(c.bX, c.bY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(c.bX, c.bY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
 			for (int i = 1; i < 9; i++) {
-				tempPoint = new Point(c.bX + i * 10, c.bY, c.z);
-				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				tempCoords = new Coords(c.bX + i * 10, c.bY, c.z);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
 			for (int i = 7; i > -1; i--) {
-				tempPoint = new Point(c.bX + i * 10, c.bY, c.z);
-				temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				tempCoords = new Coords(c.bX + i * 10, c.bY, c.z);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}
 
-			tempPoint = new Point(staticX, c.bY, c.z);
-			temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			tempCoords = new Coords(staticX, c.bY, c.z);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 		}
 
-		tempPoint = new Point(staticX, staticY, staticZ);
-		temp = new GripperPosition(tempPoint, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+		tempCoords = new Coords(staticX, staticY, staticZ);
+		temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 		positions.addElement(temp);
 	}
 }

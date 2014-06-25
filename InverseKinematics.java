@@ -9,25 +9,25 @@ public class InverseKinematics {
 	private static double ELBOW_HEIGHT = 80.0;
 	private static double ROLL_HEIGHT = 189.0;
 	
-	Vector<GripperPosition> positions;
-	Vector<JointValues> joints;
+	Vector<GripperPos> positions;
+	Vector<JointVal> joints;
 
-	public InverseKinematics(Vector<GripperPosition> p) {
+	public InverseKinematics(Vector<GripperPos> p) {
 		positions = p;
-		joints = new Vector<JointValues>();
+		joints = new Vector<JointVal>();
 
-		for (GripperPosition pos : positions) {
+		for (GripperPos pos : positions) {
 			//System.out.print("Pos was: " + pos);
 			pos = correctCartesian(pos);
 			joints.addElement(convertToJoint(pos));
 		}
-		for (JointValues j : joints) {
+		for (JointVal j : joints) {
 			System.out.println(j);
 		}
 		writeJoints();
 	}
 
-	public GripperPosition correctCartesian(GripperPosition pos) {
+	public GripperPos correctCartesian(GripperPos pos) {
 		if (pos.coords.x < 0) {
 			pos.coords.x -= 15;
 			pos.coords.y += 14;
@@ -39,10 +39,10 @@ public class InverseKinematics {
 		return pos;
 	}
 
-	public JointValues convertToJoint(GripperPosition pos) {
+	public JointVal convertToJoint(GripperPos pos) {
 
 		double c2, s2, theta1, theta2;
-		JointValues j = new JointValues();
+		JointVal j = new JointVal();
 
 		j.roll = 0; //Always 0
 		j.pitch = pos.pitch;
@@ -75,7 +75,7 @@ public class InverseKinematics {
 	public void writeJoints() {
 		try {
 			PrintWriter writer = new PrintWriter("joints.txt");
-			for (JointValues j : joints) {
+			for (JointVal j : joints) {
 				writer.println(j);
 			}
 			writer.close();
