@@ -44,7 +44,7 @@ public class InverseKinematics {
 		double c2, s2, theta1, theta2;
 		JointVal j = new JointVal();
 
-		j.roll = 0; //Always 0
+		j.roll = 90; //Always 90
 		j.pitch = pos.pitch;
 		j.grip = pos.gripper;
 

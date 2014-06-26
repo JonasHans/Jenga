@@ -9,8 +9,7 @@ public class Jenga {
 		int tX = 200;
 		int tY = 200;
 		int tZ = 0;
-		// For now theta can only be 0!
-		int theta = 0;
+		int theta = 0; // For now theta can only be 0!
 
 
 		Tower tower = new Tower(tX, tY, tZ, theta);
@@ -18,7 +17,7 @@ public class Jenga {
 
 		// User input values
 		try {
-			tX = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));
+			tX = Integer.parseInt(cnsl.readLine("What is the starting X coordinate for the tower? "));	
 			tY = Integer.parseInt(cnsl.readLine("What is the starting Y coordinate for the tower? "));
 			tZ = Integer.parseInt(cnsl.readLine("What is the starting Z coordinate for the tower? "));
 			//theta = Integer.parseInt(cnsl.readLine("What is the starting theta for the tower? ")); ONLY 0!

@@ -5,16 +5,17 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-	Tower.java \
 	Block.java \
-	BlockCoords.java \
-	Jenga.java \
 	Layer.java \
+	Tower.java \
+	BlockCoords.java \
+	Coords.java \
+	GripperPos.java \
+	JointVal.java \
+	ReadTxt.java \
+	InverseKinematics.java \
 	Move.java \
-	GripperPosition.java \
-	Point.java \
-	JointValues.java \
-	InverseKinematics.java
+	Jenga.java
 
 default: classes
 
