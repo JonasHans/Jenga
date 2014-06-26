@@ -7,7 +7,7 @@ public class Jenga {
 
 		// Default values
 		int tX = 50;
-		int tY = 350;
+		int tY = 400;
 		int tZ = 0;
 		int theta = 0; // For now theta can only be 0!
 

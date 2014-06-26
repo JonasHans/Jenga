@@ -5,7 +5,7 @@ public class Move {
 	static private double GRIPPER_LENGTH = 189.0;
 	static private double GRIPPER_PITCH = 0;
 	static private double GRIPPER_GRIP = 0;
-	static private double PAPER_LENGTH = 0;
+	static private double PAPER_LENGTH = 80;
 
 	boolean isLegal;
 	boolean gameEnds;
