@@ -66,6 +66,9 @@ public class Move {
 
 			positions = new Vector<GripperPos>();
 			planPath(t, coords, b, 1);
+			for (GripperPos p : positions) {
+				System.out.println(p);
+			}
 			iK = new InverseKinematics(positions);
 
 			try {
@@ -79,6 +82,9 @@ public class Move {
 
 			positions = new Vector<GripperPos>();
 			planPath(t, coords, b, 2);
+			for (GripperPos p : positions) {
+				System.out.println(p);
+			}
 			iK = new InverseKinematics(positions);
 
 			try {
@@ -90,9 +96,12 @@ public class Move {
 
 			ReadTxt val2 = new ReadTxt();
 
-			if (val1.surface > val2.surface) {
+			if (val1.surface <= val2.surface) {
 				positions = new Vector<GripperPos>();
 				planPath(t, coords, b, 3);
+				for (GripperPos p : positions) {
+					System.out.println(p);
+				}
 				iK = new InverseKinematics(positions);
 				return true;
 			} 
@@ -135,7 +144,7 @@ public class Move {
 	public void planPath(Tower t, BlockCoords c, Block b, int stage) {
 
 		double staticX = t.x - 200;
-		double staticY = t.y - 210;
+		double staticY = t.y - 290;
 		double staticZ = t.z + 450;
 
 		Coords tempCoords;
@@ -151,11 +160,11 @@ public class Move {
 			if (b.direction == 'Y') {
 				c.bY -= extraLength;
 
-				tempCoords = new Coords(c.bX, staticY - 20, staticZ);
+				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 
-				tempCoords = new Coords(c.bX, staticY - 20, c.z);
+				tempCoords = new Coords(c.bX, staticY, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 

@@ -22,7 +22,7 @@ public class BlockCoords {
 		int col = 2 - b.getColumn();
 		char direction = b.getDirection();
 
-		z = row * BLOCK_HEIGHT + 1 * BLOCK_HEIGHT + boardZ;
+		z = row * BLOCK_HEIGHT + 0.5 * BLOCK_HEIGHT + boardZ;
 
 		// X and Y dependant on direction of block
 		if (direction == 'Y') {
