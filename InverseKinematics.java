@@ -67,6 +67,9 @@ public class InverseKinematics {
 		j.shoulder = Math.toDegrees(theta1);
 		j.elbow = Math.toDegrees(theta2);
 		j.yaw = -((j.elbow / 2) + j.shoulder);
+		if (pos.direction == 'X') {
+			j.yaw += 90;
+		}
 
 		return j;
 	}
