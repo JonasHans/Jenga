@@ -151,11 +151,11 @@ public class Move {
 			if (b.direction == 'Y') {
 				c.bY -= extraLength;
 
-				tempCoords = new Coords(c.bX, staticY, staticZ);
+				tempCoords = new Coords(c.bX, staticY - 20, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 
-				tempCoords = new Coords(c.bX, staticY, c.z);
+				tempCoords = new Coords(c.bX, staticY - 20, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 
@@ -246,7 +246,7 @@ public class Move {
 			tempCoords = new Coords(staticX, staticY, staticZ);
 			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
-			
+
 			if (b.direction == 'Y') {
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
