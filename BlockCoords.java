@@ -38,11 +38,11 @@ public class BlockCoords {
 		}
 
 		// Rotate and translate vectors
-		bX = boardX + Math.cos(theta) * bX - Math.sin(theta) * bY;
-		bY = boardY + Math.sin(theta) * bX + Math.cos(theta) * bY;
+		bX += boardX; // + Math.cos(theta) * bX - Math.sin(theta) * bY;
+		bY += boardY; // + Math.sin(theta) * bX + Math.cos(theta) * bY;
 
-		eX = boardX + Math.cos(theta) * eX - Math.sin(theta) * eY;
-		eY = boardY + Math.sin(theta) * eX + Math.cos(theta) * eY;
+		eX += boardX; // + Math.cos(theta) * eX - Math.sin(theta) * eY;
+		eY += boardY; // + Math.sin(theta) * eX + Math.cos(theta) * eY;
 	}
 
 	public String toString() {

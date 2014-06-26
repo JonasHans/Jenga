@@ -130,7 +130,7 @@ public class Move {
 	// Searches block for the robot arm
 	public int[] searchBlock(Tower t) {
 
-		for (int i = 10; i < t.struct.size() - 1; i++) {
+		for (int i = 8; i < t.struct.size() - 1; i += 2) {
 			for (int j = 0 ; j < 3; j++) {
 				if(legalMove(t, i, j)) {
 					int[] coords = {i, j};
@@ -177,7 +177,7 @@ public class Move {
 				positions.addElement(temp);
 			// X direction
 			} else {
-				c.bX -= extraLength;
+				c.bX += extraLength;
 
 				tempCoords = new Coords(staticX, c.bY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
