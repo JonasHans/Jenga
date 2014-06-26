@@ -133,7 +133,7 @@ public class Move {
 	public void planPath(Tower t, BlockCoords c, Block b, int stage) {
 
 		double staticX = t.x - 200;
-		double staticY = t.y - 200;
+		double staticY = t.y - 210;
 		double staticZ = t.z + 450;
 
 		System.out.println(staticX + " " + staticY + " " + staticZ);
@@ -145,12 +145,17 @@ public class Move {
 		char direction = b.direction;
 
 		if (stage == 1) {
-			tempCoords = new Coords(staticX, staticY, c.z);
+			tempCoords = new Coords(staticX, staticY, staticZ);
 			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
 			if (b.direction == 'Y') {
 				c.bY -= extraLength;
+
+				tempCoords = new Coords(c.bX, staticY, staticZ);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				positions.addElement(temp);
+
 				tempCoords = new Coords(c.bX, staticY, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
@@ -165,6 +170,11 @@ public class Move {
 			// X direction
 			} else {
 				c.bX -= extraLength;
+
+				tempCoords = new Coords(staticX, c.bY, staticZ);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				positions.addElement(temp);
+
 				tempCoords = new Coords(staticX, c.bY, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
@@ -210,6 +220,10 @@ public class Move {
 				tempCoords = new Coords(c.bX, staticY, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
+
+				tempCoords = new Coords(c.bX, staticY, staticZ);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				positions.addElement(temp);
 			// X direction
 			} else {
 				for (int i = 2; i < 9; i++) {
@@ -225,6 +239,10 @@ public class Move {
 				}
 
 				tempCoords = new Coords(staticX, c.bY, c.z);
+				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+				positions.addElement(temp);
+
+				tempCoords = new Coords(staticX, c.bY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			}

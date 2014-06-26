@@ -6,8 +6,8 @@ public class Jenga {
 	public static void main(String[] args) {
 
 		// Default values
-		int tX = 200;
-		int tY = 200;
+		int tX = 50;
+		int tY = 350;
 		int tZ = 0;
 		int theta = 0; // For now theta can only be 0!
 
