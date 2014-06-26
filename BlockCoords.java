@@ -18,7 +18,7 @@ public class BlockCoords {
 		int theta = t.theta;
 
 
-		int row = b.getRow();
+		int row = b.getRow() - 1;
 		int col = 2 - b.getColumn();
 		char direction = b.getDirection();
 
