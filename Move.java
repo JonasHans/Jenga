@@ -138,9 +138,6 @@ public class Move {
 		double staticY = t.y - 210;
 		double staticZ = t.z + 450;
 
-		System.out.println(staticX + " " + staticY + " " + staticZ);
-		System.out.println(c);
-
 		Coords tempCoords;
 		GripperPos temp;
 		double extraLength = GRIPPER_LENGTH + PAPER_LENGTH;
@@ -194,8 +191,12 @@ public class Move {
 
 
 		} else if (stage == 2) {
+
+			tempCoords = new Coords(staticX, staticY, staticZ);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			positions.addElement(temp);
+
 			if (b.direction == 'Y') {
-				c.bY -= extraLength;
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
@@ -218,7 +219,6 @@ public class Move {
 				positions.addElement(temp);
 			// X direction
 			} else {
-				c.bX -= extraLength;
 
 				tempCoords = new Coords(staticX, c.bY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
@@ -242,8 +242,12 @@ public class Move {
 			}
 
 		} else { // Stage = 3
-			if (b.direction == 'Y') {				
-				c.bY -= extraLength;
+
+			tempCoords = new Coords(staticX, staticY, staticZ);
+			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
+			positions.addElement(temp);
+			
+			if (b.direction == 'Y') {
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
@@ -285,8 +289,7 @@ public class Move {
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
 			// X direction
-			} else {				
-				c.bX -= extraLength;
+			} else {			
 
 				tempCoords = new Coords(staticX, c.bY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
