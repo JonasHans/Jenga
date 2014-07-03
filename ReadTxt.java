@@ -1,15 +1,15 @@
+/** 
+  * This class reads out the value of the matlab image processing function,
+  * using a buffered reader. It transforms the generated string into a double
+  * and returns the value.
+  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @version June 2014
+  */
+
 import java.util.*;
 import java.text.DecimalFormat;
 import java.io.*;
 import java.io.FileReader;
-
-/*****************************************************************************
-
-    This class reads out the value of the matlab image processing function,
-    using a buffered reader. It transforms the generated string into a double
-    and returns the value. 
-
-*****************************************************************************/
 
 public class ReadTxt {
 

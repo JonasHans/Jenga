@@ -1,23 +1,40 @@
+/** 
+  * The InverseKinematics class calculates the joint positions.
+  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @version June 2014
+  */
+
 import java.util.Vector;
 import java.io.*;
 
 public class InverseKinematics {
 
+	// static variables of the elbow, shoulder and roll length
 	private static double ELBOW_LENGTH = 253.5;
 	private static double SHOULDER_LENGTH = 253.5;
 	private static double SHOULDER_HEIGHT = 95.0;
 	private static double ELBOW_HEIGHT = 80.0;
 	private static double ROLL_HEIGHT = 189.0;
 	
-	Vector<GripperPos> positions;
-	Vector<JointVal> joints;
+	/**
+	  * This vector contains all the gripper positions.
+	  */
+	public Vector<GripperPos> positions;
 
+	/**
+	  * This vector contains all the joints.
+	  */
+	public Vector<JointVal> joints;
+
+	/**
+	  * This initializes the gripper positions.
+	  * @param p Vector containing gripper positions
+	  */
 	public InverseKinematics(Vector<GripperPos> p) {
 		positions = p;
 		joints = new Vector<JointVal>();
 
 		for (GripperPos pos : positions) {
-			//System.out.print("Pos was: " + pos);
 			pos = correctCartesian(pos);
 			joints.addElement(convertToJoint(pos));
 		}
@@ -27,6 +44,10 @@ public class InverseKinematics {
 		writeJoints();
 	}
 
+	/**
+	  * Corrects the coordinates, which are hardcoded and we found using the umi rtx simulator
+	  * @param pos Gripper position
+	  */
 	public GripperPos correctCartesian(GripperPos pos) {
 		if (pos.coords.x < 0) {
 			pos.coords.x -= 15;
@@ -39,6 +60,10 @@ public class InverseKinematics {
 		return pos;
 	}
 
+	/**
+	  * Converts a gripper position to joint values
+	  * @param pos Gripper position
+	  */
 	public JointVal convertToJoint(GripperPos pos) {
 
 		double c2, s2, theta1, theta2;
@@ -74,7 +99,9 @@ public class InverseKinematics {
 		return j;
 	}
 
-
+	/**
+	  * Write method for joints
+	  */
 	public void writeJoints() {
 		try {
 			PrintWriter writer = new PrintWriter("joints.txt");

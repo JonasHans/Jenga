@@ -1,17 +1,42 @@
+/** 
+  * The Layer class containg one layer of a jenga tower.
+  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @version June 2014
+  */
+
 import java.util.Vector;
 
 public class Move {
 
+	// Statix gripper and paper variables
 	static private double GRIPPER_LENGTH = 189.0;
 	static private double GRIPPER_PITCH = 0;
 	static private double GRIPPER_GRIP = 0;
 	static private double PAPER_LENGTH = 80;
 
-	boolean isLegal;
-	boolean gameEnds;
-	Vector<GripperPos> positions;
 
-	// Dummy move to print tower and set booleans
+	/**
+	  * True if a move is legal.
+	  */
+	public boolean isLegal;
+
+
+	/**
+	  * true if game is over
+	  */
+	public boolean gameEnds;
+
+
+	/**
+	  * vector containg all the gripper positions for a move
+	  */
+	public Vector<GripperPos> positions;
+
+	
+	/**
+	  * Standard constructor for a move
+	  * @param t tower
+	  */
 	public Move(Tower t) {
 		isLegal = true;
 		gameEnds = false;
@@ -19,15 +44,22 @@ public class Move {
 		t.printTower();
 	}
 
-	// AI move
+	
+	/**
+	  * This makes an AI move.
+	  * @param t tower
+	  * @param ai String containing "AImove"
+	  */
 	public Move(Tower t, String ai) {
 
 		gameEnds = false;
 		isLegal = true;
+		// Returns a block position of a block which can be retrieved
 		int[] position = searchBlock(t);
 		int row = position[0];
 		int col = position[1];
 
+		// if a block was found remove it and calculate its movements
 		if (position != null) {
 			Block b = t.getBlock(row, col);
 			BlockCoords coords = new BlockCoords(t, b);
@@ -37,21 +69,26 @@ public class Move {
 		} else {
 			gameEnds = true;
 		}
-		/*for (GripperPos pos : positions) {
-			System.out.println(pos);
-		}*/
 	}
 
-	// Human move
+	
+	/**
+	  * The constructor for a player move.
+	  * @param t tower
+	  * @param row row 
+	  * @param col column
+	  */
 	public Move(Tower t, int row, int col) {
 
 		gameEnds = false;
 		isLegal = false;
 		
+		// This is we want the game to end
 		if (row == 9001) {
 			gameEnds = true;
 		}
 
+		// If its a legalmove, play the move
 		if (legalMove(t, row, col)) {
 			isLegal = true;
 			t.removeBlock(row, col);
@@ -59,56 +96,63 @@ public class Move {
 		}
 	}
 
-
+	/**
+	  * Makes a move.
+	  * @param t tower
+	  * @param coords block coordinates
+	  * @param b block
+	  */
 	public boolean movement(Tower t, BlockCoords coords, Block b) {
 
 			InverseKinematics iK;
-
+			// Initialize a gripper position vector
 			positions = new Vector<GripperPos>();
+
+			// plans the path for the move, stage 1
 			planPath(t, coords, b, 1);
-			for (GripperPos p : positions) {
-				System.out.println(p);
-			}
+
+			// Calculate inverse kinematics for the positions
 			iK = new InverseKinematics(positions);
 
+			// Wait for user input to start next stage
 			try {
 				System.out.println("Press enter to continue");
 				System.in.read(); // Pause
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			ReadTxt val1 = new ReadTxt();
 
+			// plans the path for the move, stage 2
 			positions = new Vector<GripperPos>();
 			planPath(t, coords, b, 2);
-			for (GripperPos p : positions) {
-				System.out.println(p);
-			}
 			iK = new InverseKinematics(positions);
 
+			// Wait for user input to start next stage
 			try {
 				System.out.println("Press enter to continue");
 				System.in.read(); // Pause
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			ReadTxt val2 = new ReadTxt();
 
+			// plans the path for the move, stage 3
 			if (val1.surface <= val2.surface) {
 				positions = new Vector<GripperPos>();
 				planPath(t, coords, b, 3);
-				for (GripperPos p : positions) {
-					System.out.println(p);
-				}
 				iK = new InverseKinematics(positions);
 				return true;
 			} 
 			return false;
 	}
 
-	// Checks if a certain move is legal
+	/**
+	  * Checks if a move is legal
+	  * @param t tower
+	  * @param row row
+	  * @param col column
+	  */
 	public boolean legalMove(Tower t, int row, int col) {
 
 		// Middle block sides should be present in layer
@@ -127,11 +171,17 @@ public class Move {
 		return (t.inTower(row, col) && t.hasBlock(row, col));
 	}
 
-	// Searches block for the robot arm
+	/**
+	  * Searches the tower for a block which can be retrieved
+	  * @param t tower
+	  */
 	public int[] searchBlock(Tower t) {
 
+		// search all the layers
 		for (int i = 8; i < t.struct.size() - 1; i += 2) {
+			// search one layer
 			for (int j = 0 ; j < 3; j++) {
+				// if the block can be moved its coordinates are returned
 				if(legalMove(t, i, j)) {
 					int[] coords = {i, j};
 					return coords;
@@ -141,8 +191,16 @@ public class Move {
 		return null;
 	}
 
+	/**
+	  * Plans a path for a move
+	  * @param t tower
+	  * @param c block coordinates
+	  * @param b block
+	  * @param stage stage
+	  */
 	public void planPath(Tower t, BlockCoords c, Block b, int stage) {
 
+		// safe x, y and z coordinates 
 		double staticX = t.x - 200;
 		double staticY = t.y - 290;
 		double staticZ = t.z + 450;
@@ -150,14 +208,16 @@ public class Move {
 		Coords tempCoords;
 		GripperPos temp;
 		double extraLength = GRIPPER_LENGTH + PAPER_LENGTH;
-		char direction = b.direction;
+		char direction = b.getDirection();
 
+		// The first stage
 		if (stage == 1) {
 			tempCoords = new Coords(staticX, staticY, staticZ);
 			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			if (b.direction == 'Y') {
+			// Y direction
+			if (b.getDirection() == 'Y') {
 				c.bY -= extraLength;
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
@@ -175,6 +235,7 @@ public class Move {
 				tempCoords = new Coords(c.bX, c.bY, c.z);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
+
 			// X direction
 			} else {
 				c.bX += extraLength;
@@ -196,8 +257,9 @@ public class Move {
 				positions.addElement(temp);
 			}
 
-			// CALL MATLAB FUNCTION
-
+			/*
+			 * This where we would have liked to call our MATLAB function.
+			 */
 
 		} else if (stage == 2) {
 
@@ -205,7 +267,8 @@ public class Move {
 			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			if (b.direction == 'Y') {
+			// Y direction
+			if (b.getDirection() == 'Y') {
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
@@ -250,13 +313,15 @@ public class Move {
 				positions.addElement(temp);
 			}
 
-		} else { // Stage = 3
-
+		} else {
+		
+			// Stage = 3
 			tempCoords = new Coords(staticX, staticY, staticZ);
 			temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 			positions.addElement(temp);
 
-			if (b.direction == 'Y') {
+			// Y direction
+			if (b.getDirection() == 'Y') {
 
 				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
@@ -297,6 +362,7 @@ public class Move {
 				tempCoords = new Coords(c.bX, staticY, staticZ);
 				temp = new GripperPos(tempCoords, GRIPPER_PITCH, GRIPPER_GRIP, direction);
 				positions.addElement(temp);
+
 			// X direction
 			} else {			
 

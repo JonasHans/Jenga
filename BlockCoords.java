@@ -1,3 +1,9 @@
+/** 
+  * The blockcoords class which calculates the block coordinates.
+  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @version June 2014
+  */
+
 public class BlockCoords {
 
 	// Dimensions
@@ -6,10 +12,15 @@ public class BlockCoords {
 	static private double BLOCK_HEIGHT = 15;
 
 	// Coordinates of a block
-	double bX, bY;
-	double eX, eY;    
-	double z;
+	public double bX, bY;
+	public double eX, eY;    
+	public double z;
 
+	/**
+	  * This initializes the block coordinates.
+	  * @param t tower
+	  * @param b block
+	  */
 	public BlockCoords(Tower t, Block b) {
 
 		int boardX = t.x;
@@ -37,7 +48,7 @@ public class BlockCoords {
 			eY = bY;
 		}
 
-		// Rotate and translate vectors
+		// Rotation is not possible at this time, the tower coordinates are given
 		bX += boardX; // + Math.cos(theta) * bX - Math.sin(theta) * bY;
 		bY += boardY; // + Math.sin(theta) * bX + Math.cos(theta) * bY;
 
@@ -45,6 +56,9 @@ public class BlockCoords {
 		eY += boardY; // + Math.sin(theta) * eX + Math.cos(theta) * eY;
 	}
 
+	/**
+	  * Creates a comprehensible string of a block coordinates object for print purposes
+	  */
 	public String toString() {
 		String print = "";
 		print += "Begin: " + bX + " " + bY  + " End: " + eX + " " + eY + " Z: " + z;

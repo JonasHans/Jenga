@@ -1,14 +1,27 @@
+/** 
+  * The Tower class represent a jenga tower and all of its layers and blocks.
+  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @version June 2014
+  */
+
 import java.util.*;
 import java.io.*;
 
 public class Tower {
 
-	ArrayList<Layer> struct;
-	int x;
-	int y;
-	int z;
-	int theta;
+	public ArrayList<Layer> struct;
+	public int x;
+	public int y;
+	public int z;
+	public int theta;
 
+	/**
+	  * This creates a tower representation.
+	  * @param tx x coordinate of the tower
+	  * @param ty y coordinate of the tower
+	  * @param tz z coordinate of the tower
+	  * @param ttheta theta of the tower
+	  */
 	public Tower(int tx, int ty, int tz, int ttheta) {
 		x  = tx;
 		y = ty;
@@ -17,6 +30,7 @@ public class Tower {
 		struct = new ArrayList<Layer>();
 		Layer temp;
 
+		// Create all the layers for the tower which has a standard height of 18
 		for(int i = 0; i < 18; i++) {
 			if (i % 2 == 0) {
 				temp = new Layer('Y', i);
@@ -27,17 +41,29 @@ public class Tower {
 		}
 	}
 
+	/**
+	  * This creates a tower represention with an already given representation.
+	  * @param tx x coordinate of the tower
+	  * @param ty y coordinate of the tower
+	  * @param tz z coordinate of the tower
+	  * @param ttheta theta of the tower
+	  * @param newTower True if old tower is specified to be used
+	  */
 	public Tower(int tx, int ty, int tz, int ttheta, boolean newTower) {
 		x  = tx;
 		y = ty;
 		z = tz;
 		theta = ttheta;
-
 		struct = new ArrayList<Layer>();
+
+		// Read the already present tower.txt file and take it as the representation
 		struct = readTower();
 
 	}
 
+	/**
+	  * Print the tower representation
+	  */
 	public void printTower() {
 		System.out.println("\tColumn");
 		System.out.println("Row\t1 2 3");
@@ -47,6 +73,9 @@ public class Tower {
 		}
 	}
 
+	/**
+	  * Read the existing tower representation from tower.txt
+	  */
 	private ArrayList<Layer> readTower() {
 
 		int layerNr = 0;
@@ -55,6 +84,7 @@ public class Tower {
 		String[] splitLine;
 		BufferedReader br;
 
+		// Try to read the tower.txt file 
 		try {
 			br = new BufferedReader(new FileReader("tower.txt"));
 			
@@ -66,6 +96,7 @@ public class Tower {
 						direction = s.charAt(0);
 					}
 				}
+
 				// Make layer and add to tower
 				Layer temp = new Layer(direction, layerNr, splitLine);
 				struct.add(temp);
@@ -78,6 +109,9 @@ public class Tower {
 		return struct;
 	}
 
+	/**
+	  * Write the tower representation to tower.txt
+	  */
 	public void writeTower() {
 		try {
 			PrintWriter writer = new PrintWriter("tower.txt");
@@ -90,15 +124,24 @@ public class Tower {
 	    }
 	}
 
-
+	/**
+	  * Remove a block from the tower
+	  * @param row row
+	  * @param col column
+	  */
 	public void removeBlock(int row, int col) {
 		struct.get(row).blocks[col] = null;
 	}
 
+	/**
+	  * Add a block to the tower
+	  */
 	public void addBlock() {
 		boolean newLayer = true;  
 		Layer topLayer = struct.get(struct.size() - 1);
 		Block tempBlock;
+
+		// Try to add a block to the top layer if possible
 		for (int i = 0; i < 3; i++) {
 			if (topLayer.blocks[i] == null) {
 				tempBlock = new Block(i, topLayer.getDirection(), struct.size()-1);
@@ -108,6 +151,7 @@ public class Tower {
 			}
 		}
 
+		// Add a new layer to the tower
 		if (newLayer) {
 			String newLayerDirection = "";
 			if (topLayer.getDirection() == 'X') {
@@ -123,15 +167,29 @@ public class Tower {
 		}
 	}
 
+	/**
+	  * Check if the specified row and column has a block
+	  * @param row row
+	  * @param col column
+	  */
 	public boolean hasBlock(int row, int col) {
 		return (struct.get(row).blocks[col] != null);
 	}
 
-	// Returns true if block is in tower (and not top layer)
+	/**
+	  * Check if block is in the tower(and not on the top layer)
+	  * @param row row
+	  * @param col column
+	  */
 	public boolean inTower(int row, int col) {
 		return (row < struct.size() -1 && row >= 0 && col >= 0 && col <= 2);
 	}
 
+	/**
+	  * Returns the block at the specified row and column
+	  * @param row row
+	  * @param col column
+	  */
 	public Block getBlock(int row, int col) {
 		return struct.get(row).blocks[col];
 	}
