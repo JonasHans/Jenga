@@ -2,7 +2,7 @@
   * This class reads out the value of the matlab image processing function,
   * using a buffered reader. It transforms the generated string into a double
   * and returns the value.
-  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @author  Thomas Meijers, Jonas van Oenen, Nina läuger, Alessandra van Ree
   * @version June 2014
   */
 

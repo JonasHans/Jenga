@@ -1,6 +1,6 @@
 /** 
   * The blockcoords class which calculates the block coordinates.
-  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @author  Thomas Meijers, Jonas van Oenen, Nina läuger, Alessandra van Ree
   * @version June 2014
   */
 

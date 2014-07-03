@@ -1,6 +1,6 @@
 /** 
   * The JointVal class which contains all the joint values of a position.
-  * @author  Thomas Meijers, Jonas van Oenen, Nina lauger, Allessandra van Ree
+  * @author  Thomas Meijers, Jonas van Oenen, Nina läuger, Alessandra van Ree
   * @version June 2014
   */
 
